@@ -1,3 +1,5 @@
+
+
 const images = [
   {
     preview:
@@ -89,24 +91,25 @@ container.innerHTML = markup;
 
 
 container.addEventListener('click', event => {
-    event.preventDefault();
-    if (event.target === event.currentTarget) return;
+  event.preventDefault();
+  if (event.target === event.currentTarget) return;
     
-    showModal()
-    
-})
+  showModal(event)
+});
 
-function showModal(item) {
-const largeImg = event.target.dataset.source;
-    const instance = basicLightbox.create(`
-        <div class = "modal-backdrop">
-        <img class = "modal-image" src="${largeImg}" alt="event.target.alt"></div>`
-    )
+function showModal(event) {
+  const largeImg = event.target.dataset.source;
+  const altText = event.target.alt;
+
+  const instance = basicLightbox.create(`
+        <img class = "modal-image" src="${largeImg}" alt="${altText}" />`
+  );
+
     instance.show();
     
     //close modal
     const modalBackdrop = document.querySelector('.basicLightbox');
-    modalBackdrop.addEventListener('click', () => {
-        instance.close()
-    })
+  modalBackdrop.addEventListener('click', () => {
+    instance.close();
+  });
 }
